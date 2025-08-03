@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Quiz Maker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Video Background (add this line) -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="c:\Users\N.vivekvardhan\Downloads\quizeeee (online-video-cutter.com).mp4" type="video/mp4">
+    <!-- Optional: Add WebM/OGG sources for broader browser support -->
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Home Page -->
+  <div id="home" class="screen">
+    <h1>Welcome to Quiz Maker</h1>
+    <button id="createQuizBtn">Create a Quiz</button>
+    <button id="takeQuizBtn">Take a Quiz</button>
+  </div>
+
+
+  <!-- Quiz Creation -->
+  <div id="create" class="screen hidden">
+    <h2>Create a New Quiz</h2>
+    <form id="quizForm">
+      <div id="questionsContainer"></div>
+      <button type="button" id="addQuestionBtn">Add Question</button>
+      <button type="submit">Save Quiz</button>
+    </form>
+  </div>
+  <!-- Quiz Listing -->
+  <div id="quiz-list" class="screen hidden">
+    <h2>Available Quizzes</h2>
+    <div id="quizzes-container"></div>
+  </div>
+
+
+  <!-- Quiz Taking -->
+  <div id="take" class="screen hidden">
+    <h2>Take a Quiz</h2>
+    <div id="quizDisplay"></div>
+    <button id="submitQuizBtn">Submit Quiz</button>
+    <div id="result" class="hidden"></div>
+  </div>
+
+
+  <!-- Quiz Results -->
+  <div id="quiz-results" class="screen hidden">
+    <h2>Quiz Results</h2>
+    <div id="score"></div>
+    <div id="correct-answers"></div>
+    <div id="result-buttons"></div>
+    <div id="retake-button"></div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html> 

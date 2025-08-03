@@ -1,0 +1,260 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+
+/* Screen Container */
+.screen {
+  width: 100%;
+  max-width: 800px;
+  background: #08080867;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem;
+  margin: 1rem auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  color: #ffffffcf;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.25rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+/* Buttons */
+button {
+  background-color: #371e49f0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: #262727;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#createQuizBtn, #takeQuizBtn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0.75rem auto;
+}
+
+/* Quiz Creation Form */
+#quizForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.question {
+  background: #fbfdff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.question input, .question select {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.question input:focus, .question select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.remove-question {
+  background-color: #dc3545;
+  margin-top: 0.5rem;
+}
+
+.remove-question:hover {
+  background-color: #bb2d3b;
+}
+
+/* Quiz List */
+#quizzes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.quiz-item {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quiz-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-item h3 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.take-quiz {
+  width: 100%;
+}
+
+/* Quiz Taking */
+#quizDisplay {
+  margin: 1.5rem 0;
+}
+
+.quiz-question {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-question h4 {
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.quiz-question label {
+  display: block;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  background: #fff;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.quiz-question label:hover {
+  background-color: #e9ecef;
+}
+
+.quiz-question input[type="radio"] {
+  margin-right: 0.75rem;
+}
+
+/* Quiz Results */
+#quiz-results {
+  text-align: center;
+}
+
+#score {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #28a745;
+  margin: 1rem 0;
+}
+
+#correct-answers {
+  text-align: left;
+  margin: 1.5rem 0;
+}
+
+#correct-answers p {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+#result-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .screen {
+    padding: 1.5rem;
+  }
+  #quizzes-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Add this to your existing CSS */
+.delete-quiz {
+  background-color: #dc3545;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.delete-quiz:hover {
+  background-color: #bb2d3b;
+}
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+.content {
+  position: relative;
+  z-index: 1;
+}
+body {
+  margin: 0;
+  padding: 0;
+  /* Optional fallback color: */
+  background: #121212;
+}
+
+
+
+
