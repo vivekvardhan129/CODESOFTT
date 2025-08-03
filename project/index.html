@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Project Management Tool</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background-color: #f8f9f7a9;
+    color: #151515;
+  }
+
+  header {
+    background-color: #010305f9;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+  }
+
+  main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .project-creator, .task-creator {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px -5px rgba(0,0,0,0.1);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-creator h2, .task-creator h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  input[type="text"], input[type="date"], select {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1.8px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus, input[type="date"]:focus, select:focus {
+    outline: none;
+    border-color: #0052cc;
+  }
+
+  button {
+    background-color: #0052cc;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #003d99;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 20px -8px rgba(0,0,0,0.1);
+    padding: 1rem 1.5rem;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .project-header h3 {
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .tasks-list {
+    margin-top: 1rem;
+    border-top: 1px solid #e3e3e3;
+    padding-top: 1rem;
+  }
+
+  .task {
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .task > div {
+    flex-grow: 1;
+  }
+
+  .task input[type="checkbox"] {
+    transform: scale(1.3);
+    cursor: pointer;
+  }
+
+  .task .task-title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .task .task-deadline,
+  .task .task-assignee {
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .task select {
+    padding: 0.3rem 0.6rem;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    .task {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .task > div {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<header>Project Management Tool</header>
+<main>
+  <section class="project-creator">
+    <h2>Create a New Project</h2>
+    <form id="project-form">
+      <label for="project-name">Project Name</label>
+      <input type="text" id="project-name" required placeholder="Enter project name" />
+      <button type="submit">Add Project</button>
+    </form>
+  </section>
+
+  <section class="task-creator" style="display:none;">
+    <h3>Add Task to <span id="current-project-name"></span></h3>
+    <form id="task-form">
+      <label for="task-title">Task Title</label>
+      <input type="text" id="task-title" required placeholder="Enter task title" />
+
+      <label for="task-assignee">Assignee</label>
+      <input type="text" id="task-assignee" placeholder="Enter assignee name" required />
+
+      <label for="task-deadline">Deadline</label>
+      <input type="date" id="task-deadline" required />
+      <button type="submit">Add Task</button>
+    </form>
+  </section>
+
+  <section class="projects-list" id="projects-list">
+    <!-- Projects will appear here -->
+  </section>
+</main>
+
+<script>
+  const projectForm = document.getElementById('project-form');
+  const projectsListEl = document.getElementById('projects-list');
+  const taskCreatorSection = document.querySelector('.task-creator');
+  const currentProjectNameEl = document.getElementById('current-project-name');
+  const taskForm = document.getElementById('task-form');
+
+  let projects = [];
+  let selectedProjectId = null;
+
+  // Utility function to create unique IDs for projects and tasks
+  const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+
+  // Render all projects and their tasks
+  function renderProjects() {
+    projectsListEl.innerHTML = '';
+    if (projects.length === 0) {
+      projectsListEl.innerHTML = '<p style="font-style:italic; color:#777;">No projects created yet.</p>';
+      taskCreatorSection.style.display = 'none';
+      selectedProjectId = null;
+      return;
+    }
+
+    projects.forEach(project => {
+      const projectEl = document.createElement('div');
+      projectEl.className = 'project';
+
+      const projectHeader = document.createElement('div');
+      projectHeader.className = 'project-header';
+
+      const projectTitle = document.createElement('h3');
+      projectTitle.textContent = project.name;
+      projectTitle.style.cursor = 'pointer';
+      projectTitle.title = 'Click to select project';
+
+      // Highlight selected project
+      if(project.id === selectedProjectId){
+        projectTitle.style.color = '#0052cc';
+        projectTitle.style.textDecoration = 'underline';
+      }
+
+      projectTitle.addEventListener('click', () => {
+        selectedProjectId = project.id;
+        currentProjectNameEl.textContent = project.name;
+        taskCreatorSection.style.display = 'block';
+        renderProjects();
+      });
+
+      // Delete project button
+      const deleteProjectBtn = document.createElement('button');
+      deleteProjectBtn.textContent = 'Delete Project';
+      deleteProjectBtn.style.backgroundColor = '#cc0000';
+      deleteProjectBtn.style.marginLeft = '10px';
+      deleteProjectBtn.style.fontSize = '0.8rem';
+      deleteProjectBtn.style.padding = '0.35rem 0.7rem';
+      deleteProjectBtn.style.borderRadius = '5px';
+
+      deleteProjectBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if(confirm(`Are you sure you want to delete project "${project.name}"?`)){
+          projects = projects.filter(p => p.id !== project.id);
+          if(selectedProjectId === project.id){
+            selectedProjectId = null;
+            taskCreatorSection.style.display = 'none';
+          }
+          renderProjects();
+        }
+      });
+
+      projectHeader.appendChild(projectTitle);
+      projectHeader.appendChild(deleteProjectBtn);
+
+      projectEl.appendChild(projectHeader);
+
+      // Project progress
+      const totalTasks = project.tasks.length;
+      const completedTasks = project.tasks.filter(t => t.status === 'Done').length;
+      const progressPercent = totalTasks ? Math.round((completedTasks/totalTasks)*100) : 0;
+
+      const progressDiv = document.createElement('div');
+      progressDiv.style.margin = '10px 0';
+      progressDiv.innerHTML = `
+        <div style="height:10px; background:#e0e7ff; border-radius:5px; margin-bottom:4px;">
+          <div style="height:10px; background:#2575fc; width:${progressPercent}%; border-radius:5px; transition: width 0.4s ease;"></div>
+        </div>
+        <span style="font-size:0.95rem;">${progressPercent}% complete (${completedTasks}/${totalTasks} tasks)</span>
+      `;
+
+      projectEl.appendChild(progressDiv);
+
+      // Tasks List
+      const tasksList = document.createElement('div');
+      tasksList.className = 'tasks-list';
+
+      if(project.tasks.length === 0){
+        const noTasksMsg = document.createElement('p');
+        noTasksMsg.style.fontStyle = 'italic';
+        noTasksMsg.style.color = '#777';
+        noTasksMsg.textContent = 'No tasks added yet.';
+        tasksList.appendChild(noTasksMsg);
+      }
+
+      project.tasks.forEach(task => {
+        const taskEl = document.createElement('div');
+        taskEl.className = 'task';
+
+        // Checkbox for task completion
+        const checkboxWrapper = document.createElement('div');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = (task.status === 'Done');
+        checkbox.title = 'Mark task as Done/To Do';
+
+        checkbox.addEventListener('change', () => {
+          task.status = checkbox.checked ? 'Done' : 'To Do';
+          renderProjects();
+        });
+
+        checkboxWrapper.appendChild(checkbox);
+
+        // Task title, assignee and deadline
+        const taskInfo = document.createElement('div');
+
+        const taskTitle = document.createElement('div');
+        taskTitle.className = 'task-title';
+        taskTitle.textContent = task.title;
+
+        if(task.status === 'Done'){
+          taskTitle.style.textDecoration = 'line-through';
+          taskTitle.style.color = '#777';
+        } else if(task.status === 'In Progress'){
+          taskTitle.style.color = '#0052cc';
+        }
+
+        const taskAssignee = document.createElement('div');
+        taskAssignee.className = 'task-assignee';
+        taskAssignee.textContent = `Assignee: ${task.assignee}`;
+
+        const taskDeadline = document.createElement('div');
+        taskDeadline.className = 'task-deadline';
+        taskDeadline.textContent = `Deadline: ${task.deadline}`;
+
+        taskInfo.appendChild(taskTitle);
+        taskInfo.appendChild(taskAssignee);
+        taskInfo.appendChild(taskDeadline);
+
+        // Status selector
+        const statusSelect = document.createElement('select');
+        ['To Do', 'In Progress', 'Done'].forEach(statusOption => {
+          const option = document.createElement('option');
+          option.value = statusOption;
+          option.textContent = statusOption;
+          if(task.status === statusOption) option.selected = true;
+          statusSelect.appendChild(option);
+        });
+
+        statusSelect.title = 'Change task status';
+        statusSelect.addEventListener('change', () => {
+          task.status = statusSelect.value;
+          renderProjects();
+        });
+
+        // Delete task button
+        const deleteTaskBtn = document.createElement('button');
+        deleteTaskBtn.textContent = 'Delete';
+        deleteTaskBtn.style.backgroundColor = '#cc0000';
+        deleteTaskBtn.style.color = 'white';
+        deleteTaskBtn.style.border = 'none';
+        deleteTaskBtn.style.borderRadius = '5px';
+        deleteTaskBtn.style.padding = '0.2rem 0.6rem';
+        deleteTaskBtn.style.cursor = 'pointer';
+        deleteTaskBtn.title = 'Delete task';
+
+        deleteTaskBtn.addEventListener('click', () => {
+          if(confirm(`Delete task "${task.title}"?`)){
+            project.tasks = project.tasks.filter(t => t.id !== task.id);
+            renderProjects();
+          }
+        });
+
+        taskEl.appendChild(checkboxWrapper);
+        taskEl.appendChild(taskInfo);
+        taskEl.appendChild(statusSelect);
+        taskEl.appendChild(deleteTaskBtn);
+
+        tasksList.appendChild(taskEl);
+      });
+
+      projectEl.appendChild(tasksList);
+
+      projectsListEl.appendChild(projectEl);
+    });
+  }
+
+  // Add new project
+  projectForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('project-name').value.trim();
+    if(name){
+      projects.push({
+        id: generateId(),
+        name,
+        tasks: []
+      });
+      projectForm.reset();
+      renderProjects();
+    }
+  });
+
+  // Add new task
+  taskForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if(!selectedProjectId) return;
+    const title = document.getElementById('task-title').value.trim();
+    const assignee = document.getElementById('task-assignee').value.trim();
+    const deadline = document.getElementById('task-deadline').value;
+    if(title && assignee && deadline){
+      const project = projects.find(p => p.id === selectedProjectId);
+      project.tasks.push({
+        id: generateId(),
+        title,
+        assignee,
+        deadline,
+        status: 'To Do'
+      });
+      taskForm.reset();
+      renderProjects();
+    }
+  });
+
+  renderProjects();
+  // Save projects array to localStorage
+function saveToLocal() {
+  localStorage.setItem('pm_projects', JSON.stringify(projects));
+}
+
+// Load projects array from localStorage
+function loadFromLocal() {
+  const data = localStorage.getItem('pm_projects');
+  if (data) {
+    projects = JSON.parse(data);
+  }
+}
+projects.push({
+  id: generateId(),
+  name,
+  tasks: []
+});
+saveToLocal(); // <--- Add this
+projectForm.reset();
+renderProjects();
+projects = projects.filter(p => p.id !== project.id);
+saveToLocal(); // <--- Add this
+project.tasks.push({
+  id: generateId(),
+  title,
+  assignee,
+  deadline,
+  status: 'To Do'
+});
+saveToLocal(); // <--- Add this
+project.tasks = project.tasks.filter(t => t.id !== task.id);
+saveToLocal(); // <--- Add this
+// or after changing task.status, inside any event listener:
+saveToLocal(); // <--- Add this
+
+// --- LocalStorage helpers ---
+function saveToLocal() {
+  localStorage.setItem('pm_projects', JSON.stringify(projects));
+}
+function loadFromLocal() {
+  const data = localStorage.getItem('pm_projects');
+  if (data) {
+    projects = JSON.parse(data);
+  }
+}
+
+// --- Always load on startup ---
+loadFromLocal();
+
+// ... rest of your JavaScript logic ...
+// In every place that changes `projects` or `project.tasks`, call saveToLocal() right after.
+// For example, after adding, deleting, or updating tasks and projects.
+
+</script>
+</body>
+</html>
+
