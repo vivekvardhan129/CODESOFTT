@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Details | Workaholics Job Board</title>
+  <link rel="stylesheet" href="css/job-details.css" />
+</head>
+<body>
+  <header>
+    <h1>Workaholics Job Board</h1>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="jobs.html" class="nav-link">Job Listings</a>
+      <a href="employer.html" class="nav-link">Employer Dashboard</a>
+      <a href="candidate.html" class="nav-link">Candidate Dashboard</a>
+      <a href="login.html" class="nav-link">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="jobDetail" aria-label="Job details">
+      <!-- Job details dynamically loaded by JS -->
+      <h2>Loading job details...</h2>
+    </section>
+
+    <section aria-labelledby="applyHeading">
+      <h3 id="applyHeading">Apply for this Job</h3>
+      <form id="applicationForm" enctype="multipart/form-data" autocomplete="off" novalidate>
+        <input type="text" name="name" placeholder="Your Full Name" required />
+        <input type="email" name="email" placeholder="Your Email Address" required />
+        <input type="file" name="resume" accept=".pdf,.doc,.docx" required aria-describedby="resumeHelp" />
+        <small id="resumeHelp">Upload your resume (PDF, DOC, DOCX formats)</small>
+        <button type="submit">Submit Application</button>
+      </form>
+      <div id="applicationStatus" role="alert" aria-live="polite" style="margin-top: 1rem;"></div>
+    </section>
+
+    <p style="margin-top: 2rem; text-align:center;">
+      <a href="index.html" class="back-home-link">← Back to Home</a>
+    </p>
+  </main>
+
+  <footer>
+    © 2025 Workaholics Job Board
+  </footer>
+
+  <script src="job-detail.js"></script>
+</body>
+</html>
+

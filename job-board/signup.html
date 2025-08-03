@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Workaholics Job Board</title>
+  <!-- You can reuse styles-login.css or make a new styles-signup.css -->
+  <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+  
+
+  <main>
+    <h2>Create Account</h2>
+    <form id="signupForm" autocomplete="off">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <select name="role" required>
+        <option value="">I am a...</option>
+        <option value="candidate">Job Seeker</option>
+        <option value="employer">Employer</option>
+      </select>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="signupStatus"></div>
+    <p style="text-align:center; margin-top:1.2rem;">
+      Already have an account?
+      <a href="login.html" style="color:#2736a3; text-decoration:underline;">Login here</a>
+    </p>
+  </main>
+
+  
+
+  <script src="signup.js"></script>
+</body>
+</html>

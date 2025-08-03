@@ -1,0 +1,62 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f7fb;
+  color: #23272f;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #24292e;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+header nav a {
+  color: #fff;
+  margin-left: 1.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+header nav a:hover {
+  color: #2ea44f;
+}
+.featured-jobs {
+  margin: 2rem auto;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(60,60,90,0.08);
+}
+.featured-jobs h2 {
+  margin-top: 0;
+}
+.job-card {
+  background: #f2fcf5;
+  margin: 1rem 0;
+  border-radius: 7px;
+  padding: 1rem 1.4rem;
+  border-left: 5px solid #53d074;
+}
+footer {
+  background: #24292e;
+  color: #fff;
+  text-align: center;
+  padding: 1.2rem 0;
+  margin-top: 3rem;
+}
+@media (max-width: 600px) {
+  .featured-jobs { padding: 1rem; }
+  header, footer { padding: 1rem; }
+}

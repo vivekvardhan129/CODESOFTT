@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Dashboard | Workaholics Job Board</title>
+  <!-- Candidate-specific CSS -->
+  <link rel="stylesheet" href="css/candidate.css">
+</head>
+<body>
+  <header>
+    <h1>Workaholics Job Board</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Job Listings</a>
+      <a href="employer.html">Employer Dashboard</a>
+      <a href="login.html">Logout</a>
+      <a href="signup.html">singup</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>My Profile</h2>
+      <form id="profileForm" autocomplete="off">
+        <input type="text" name="fullName" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Update Profile</button>
+      </form>
+      <div id="profileUpdateStatus"></div>
+    </section>
+
+    <section>
+      <h3>My Applications</h3>
+      <div id="myApplications">
+        <!-- JavaScript will dynamically list candidate's applications here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Workaholics Job Board
+  </footer>
+
+  <!-- Candidate-specific JS -->
+  <script src="candidate.js"></script>
+</body>
+</html>
+

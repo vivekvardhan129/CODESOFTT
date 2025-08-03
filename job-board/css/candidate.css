@@ -1,0 +1,201 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f3f9fe;
+  color: #0f1021;
+  margin: 0;
+}
+header {
+  background: #24292e;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+header nav a {
+  color: #fff;
+  margin-left: 1.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+header nav a:hover {
+  color: #2ea44f;
+}
+
+/* Main content section */
+main {
+  max-width: 800px;
+  margin: 2.5rem auto 4rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Job details box */
+#jobDetail {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(60, 60, 90, 0.1);
+  margin-bottom: 2rem;
+}
+
+#jobDetail h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+#jobDetail p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 1rem;
+}
+
+#jobDetail strong {
+  color: #1a202c;
+}
+
+/* Application form */
+form#applicationForm {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.8rem 1.4rem;
+  box-shadow: 0 1px 6px rgba(60, 60, 90, 0.07);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="file"] {
+  width: 100%;
+  padding: 0.85rem;
+  margin-bottom: 1.1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+form input[type="file"] {
+  padding: 0.4rem;
+}
+
+form small {
+  display: block;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: -0.8rem;
+  margin-bottom: 1rem;
+}
+
+form button[type="submit"] {
+  background-color: #2ea44f;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  font-size: 1.1rem;
+}
+
+form button[type="submit"]:hover {
+  background-color: #22863a;
+}
+
+/* Application status */
+#applicationStatus {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #2ea44f;
+}
+
+/* Back to home link styling */
+.back-home-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #2ea44f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: text-decoration 0.3s ease;
+}
+
+.back-home-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  header nav {
+    margin-top: 0.75rem;
+  }
+
+  header nav a {
+    margin-left: 0;
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+
+  main {
+    margin: 1.5rem auto 3rem auto;
+    padding: 0 1rem;
+  }
+
+  form button[type="submit"] {
+    width: 100%;
+  }
+}
+main {
+  max-width: 800px;
+  margin: 2.2rem auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 1px 10px rgba(60,70,120,0.09);
+}
+form#profileForm input, form#profileForm button {
+  width: 100%;
+  margin-bottom: 1.1rem;
+  padding: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #b1baf7;
+  font-size: 1rem;
+}
+form#profileForm button {
+  background: #2736a3;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+form#profileForm button:hover {
+  background: #2b4dc3;
+}
+#myApplications {
+  margin-top: 1.7rem;
+}
+footer {
+  background: #080a17;
+  color: #fff;
+  text-align: center;
+  padding: 1.1rem 0;
+}
+@media (max-width: 600px) {
+  main { padding: 1rem; }
+  header, footer { padding: 0.7rem; }
+}

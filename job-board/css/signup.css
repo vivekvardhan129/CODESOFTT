@@ -1,0 +1,79 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fafbfd;
+  color: #234;
+  margin: 0;
+}
+header {
+  background: #07172f;
+  color: #fff;
+  padding: 1.3rem 2rem;
+}
+nav {
+  margin-top: 1rem;
+}
+nav a {
+  color: #fff;
+  margin-right: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #28a745;
+}
+main {
+  max-width: 420px;
+  margin: 3.5rem auto;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(85,85,100,0.13);
+}
+h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #07205f;
+}
+form#signupForm input,
+form#signupForm select,
+form#signupForm button {
+  width: 100%;
+  padding: .85rem;
+  margin-bottom: 1.1rem;
+  border: 1px solid #b1daed;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+form#signupForm select {
+  background-color: #f6fafc;
+}
+form#signupForm button {
+  background: #07172f;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+form#signupForm button:hover {
+  background: #1b3055;
+}
+#signupStatus {
+  color: #28a745;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: .7rem;
+}
+footer {
+  background: #07172f;
+  color: #fff;
+  text-align: center;
+  padding: 1.1rem 0;
+  margin-top: 3rem;
+}
+@media (max-width: 450px) {
+  main { padding: 1rem; }
+  header, footer { padding: 0.5rem; }
+  nav a { margin-right: 1rem; }
+}

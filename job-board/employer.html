@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Dashboard | Workaholics Job Board</title>
+  <!-- Link the employer-specific CSS -->
+  <link rel="stylesheet" href="css/employer.css">
+</head>
+<body>
+  <header>
+    <h1>Workaholics Job Board</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Job Listings</a>
+      <a href="candidate.html">Candidate Dashboard</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Post a New Job</h2>
+      <form id="postJobForm" autocomplete="off">
+        <input type="text" name="title" placeholder="Job Title" required>
+        <input type="text" name="company" placeholder="Company Name" required>
+        <input type="text" name="location" placeholder="Location (e.g. Remote, Hyderabad)" required>
+        <textarea name="description" placeholder="Job Description" required rows="5"></textarea>
+        <button type="submit">Post Job</button>
+      </form>
+      <div id="jobPostStatus"></div>
+    </section>
+
+    <section>
+      <h3>Your Posted Jobs</h3>
+      <div id="employerJobs">
+        <!-- Dynamically filled by employer.js -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Workaholics Job Board
+  </footer>
+
+  <!-- Link the employer-specific JS -->
+  <script src="employer.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Listings | Workaholics Job Board</title>
+  <!-- Link to your jobs page CSS -->
+  <link rel="stylesheet" href="css/styles-jobs.css" />
+</head>
+<body>
+  <header>
+    <h1>Workaholics Job Board</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Job Listings</a>
+      <a href="employer.html">Employer Dashboard</a>
+      <a href="candidate.html">Candidate Dashboard</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2 style="text-align:center;">Available Job Openings</h2>
+    <input
+      type="text"
+      id="jobSearch"
+      placeholder="Search jobs by title or company..."
+      autocomplete="off"
+      aria-label="Search jobs"
+    />
+    <div id="jobListings">
+      <!-- Jobs will be populated here by jobs.js -->
+    </div>
+  </section>
+  <section>
+    <a href="job-details.html?id=1">full stack</a>
+  </section>
+
+  <footer>
+    © 2025 Workaholics Job Board
+  </footer>
+
+  <!-- Link to jobs page JavaScript -->
+  <script src="jobs.js"></script>
+</body>
+</html>
+
+
